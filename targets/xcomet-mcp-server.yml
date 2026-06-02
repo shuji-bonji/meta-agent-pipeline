@@ -1,0 +1,33 @@
+# Target: xcomet-mcp-server
+# COMET / xCOMET による翻訳品質評価 MCP サーバ
+
+name: xcomet-mcp-server
+repo_url: https://github.com/shuji-bonji/xcomet-mcp-server
+local_path: ~/workspace/shuji-bonji/mcps/xcomet-mcp-server
+language: typescript
+description: Translation quality evaluation MCP server using xCOMET
+
+# 実行コマンド
+test_command: npm test
+lint_command: npm run lint
+typecheck_command: npm run typecheck
+build_command: npm run build
+
+# ブランチ運用
+default_branch: main
+feature_branch_prefix: "feat/"
+
+# 触る時の注意
+caveats:
+  - "xCOMET 本体は Python 製。Node からは subprocess 経由で呼ぶ前提"
+  - "翻訳品質スコアは 0.0 - 1.0、合格閾値は 0.85 を既定とする"
+  - "大量バッチ評価時は GPU メモリに注意"
+
+# 2 週目実証用 Issue 候補 (未確定)
+candidate_issues:
+  - title: "batch evaluate のチャンクサイズ自動調整"
+    rationale: "VRAM 不足時のフォールバック挙動を改善"
+    risk: medium
+  - title: "evaluate 結果のキャッシュ層"
+    rationale: "同一文の重複評価を避けてコスト削減"
+    risk: small

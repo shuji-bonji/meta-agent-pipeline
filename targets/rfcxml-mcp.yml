@@ -1,0 +1,32 @@
+# Target: rfcxml-mcp
+# IETF RFC を XML 形式で取得・解析する MCP サーバ
+
+name: rfcxml-mcp
+repo_url: https://github.com/shuji-bonji/rfcxml-mcp
+local_path: ~/workspace/shuji-bonji/mcps/rfcxml-mcp
+language: typescript
+description: IETF RFC XML parser MCP server
+
+# 実行コマンド (sandbox 内で Sub-agent が叩く)
+test_command: npm test
+lint_command: npm run lint
+typecheck_command: npm run typecheck
+build_command: npm run build
+
+# ブランチ運用
+default_branch: main
+feature_branch_prefix: "feat/"
+
+# 触る時の注意 (memory 由来。実証で増やしていく)
+caveats:
+  - "RFC XML パーサは外部 URL を取得するため、テストは fixture を使う"
+  - "RFC number は数値だが zero-padding しない (e.g., 8259 not 08259)"
+
+# 初回実証用 Issue 候補 (未確定。Phase 2 開始時に決定)
+candidate_issues:
+  - title: "batch fetch tool の追加 (複数 RFC 並列取得)"
+    rationale: "ai-agent-architecture 系のドキュメント執筆で複数 RFC を引きたい時に有用"
+    risk: small
+  - title: "RFC index 検索の改善"
+    rationale: "現状フルテキスト検索のみ、index search が弱い"
+    risk: medium
